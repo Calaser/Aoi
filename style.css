@@ -2,6 +2,7 @@
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  box-sizing: border-box;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
@@ -35,8 +36,10 @@ body {
 }
 
 h1 {
-  font-size: 3.2em;
+  font-size: 2em;
   line-height: 1.1;
+  align-self: center;
+  margin-block: 15px;
 }
 
 h3 {
@@ -50,7 +53,19 @@ h3 {
   margin: 0 auto;
   padding: 2rem;
   background-color: aliceblue;
+}
 
+.row {
+  display: flex;
+  align-items: center;
+}
+
+.itemTag {
+  margin-right: 3px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: bold;
 }
 
 .container {
@@ -63,10 +78,20 @@ h3 {
   background-color: #f8aa19;
 }
 
-.print,
+.btnContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.print {
+  flex-grow: 1;
+  background-color: #23ffc8;
+}
+
 .reset {
-  margin-top: 20px;
-  margin-inline: 30px;
+  background-color: #fd5000;
+  width: fit-content;
 }
 
 [disable] {
@@ -79,9 +104,10 @@ h3 {
 }
 
 button {
+  padding: 0.3em 1.2em;
+  height: fit-content;
   border-radius: 8px;
   border: 2px solid transparent;
-  padding: 0.3em 1.2em;
   margin-inline: 3px;
   font-size: 1em;
   font-weight: 500;
@@ -132,13 +158,17 @@ button:hover {
 
 @media (max-width:600px) {
   #app {
-    padding: 3px 0;
+    padding: 5px;
   }
 
   .grid {
     width: 35px;
     height: 35px;
     font-size: 12px;
+  }
+
+  button.n {
+    padding: 0.2em 0.8em;
   }
 }
 

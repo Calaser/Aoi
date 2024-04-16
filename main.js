@@ -139,16 +139,16 @@ function initializeBoard() {
     return JSON.parse(JSON.stringify(map));
 }
 
+const data = [
+    [[3, 2], [1, 3], [2, 1]],
+    [[4, 2], [2, 2], [1, 3]],
+    [[3, 3], [1, 4], [2, 1]],
+    [[3, 2], [1, 3], [2, 1]],
+    [[4, 2], [2, 2], [1, 3]],
+    [[3, 3], [1, 4], [2, 1]],
+    [[2, 2], [1, 3], [2, 1]],
+];
 function generateRectangles(n, a, b, c) {
-    const data = [
-        [[3, 2], [1, 3], [2, 1]],
-        [[4, 2], [2, 2], [1, 3]],
-        [[3, 3], [1, 4], [2, 1]],
-        [[3, 2], [1, 3], [2, 1]],
-        [[4, 2], [2, 2], [1, 3]],
-        [[3, 3], [1, 4], [2, 1]],
-        [[2, 2], [1, 3], [2, 1]],
-    ];
     const rectangle = [];
     for (let i = 0; i < a; i++) {
         rectangle.push(data[n - 1][0]);
@@ -187,6 +187,7 @@ let averageResults;
 
 document.querySelector('#app').innerHTML = `
 <div class="container">
+    <h1>總決算計算器</h1>
     <div>
     箱數
     ${(function fun() {
@@ -198,9 +199,12 @@ document.querySelector('#app').innerHTML = `
     })()}
     </div>
     <h3>剩餘道具</h3>
-    <div>
-    一獎
-    ${(function fun() {
+    <div class="row">
+        <div class="itemTag">
+            <span>1 獎</span>
+            <span class="prize1">(n * n)</span>
+        </div>
+        ${(function fun() {
         let html = "";
         for (let n = 0; n <= 1; n++) {
             html += `<button class="a" data-num=${n}>${n}</button>`
@@ -208,19 +212,26 @@ document.querySelector('#app').innerHTML = `
         return html;
     })()}
     </div>
-    <div>
-    二獎
-    ${(function fun() {
+    <div class="row">
+        <div class="itemTag">
+            <span>2 獎</span>
+            <span class="prize2">(n * n)</span>
+        </div>
+        ${(function fun() {
         let html = "";
         for (let n = 0; n <= 3; n++) {
             html += `<button class="b" data-num=${n}>${n}</button>`
         }
         return html;
     })()}
+        <br>
     </div>
-    <div>
-    三獎
-        ${(function fun() {
+    <div class="row">
+        <div class="itemTag">
+            <span>3 獎</span>
+            <span class="prize3">(n * n)</span>
+        </div>
+            ${(function fun() {
         let html = "";
         for (let n = 0; n <= 5; n++) {
             html += `<button class="c" data-num=${n}>${n}</button>`
@@ -228,7 +239,10 @@ document.querySelector('#app').innerHTML = `
         return html;
     })()}
     </div>
-    <button class="print">print</button>
+    <div class="btnContainer">
+        <button class="print">print</button>
+        <button class="reset"></button>
+    </div>
     <div class="output">
     ${(function fun() {
         let html = "";
@@ -241,18 +255,21 @@ document.querySelector('#app').innerHTML = `
         return html;
     })()}
     </div>
-    <button class="reset"></button>
 </div>
 `
 
 renderBtn();
+for (let k = 0; k < 3; k++)
+    document.querySelector(`.prize${k + 1}`).innerText = `(${data[n - 1][k][0]} x ${data[n - 1][k][1]})`;
 
 document.querySelectorAll(".n").forEach(btn => btn.addEventListener("click", (e) => {
     n = e.target.dataset.num;
-    a = defaultCount[n-1][0].toString();
-    b = defaultCount[n-1][1].toString();
-    c = defaultCount[n-1][2].toString();
+    a = defaultCount[n - 1][0].toString();
+    b = defaultCount[n - 1][1].toString();
+    c = defaultCount[n - 1][2].toString();
 
+    for (let k = 0; k < 3; k++)
+        document.querySelector(`.prize${k + 1}`).innerText = `(${data[n - 1][k][0]} x ${data[n - 1][k][1]})`;
     renderBtn();
 }))
 document.querySelectorAll(".a").forEach(btn => btn.addEventListener("click", (e) => {
