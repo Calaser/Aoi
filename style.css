@@ -147,7 +147,7 @@ button:hover {
   #background {
     position: fixed;
     inset: 0;
-    background-image: url("background.jpg");
+    background-image: url("public/background.jpg");
     background-position-x: right;
     background-repeat: no-repeat;
     background-size: cover;
