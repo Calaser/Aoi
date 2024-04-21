@@ -119,10 +119,26 @@ function checkAndCorrectResults() {
 }
 
 function printBoard(board) {
+    let max = 0;
+    for (const [index, row] of board.entries()) {
+        max < Math.max(...row) ? max = Math.max(...row) : undefined;
+    }
     // Print the board.
     for (const [index, row] of board.entries()) {
         for (let x = 0; x < 9; x++) {
-            document.querySelector(`[class="grid x${x} y${index}"]`).innerText = (row[x] >= 0 ? row[x].toFixed(2) : "X");
+            document.querySelector(`[class="grid x${x} y${index}"]`).hasAttribute("btnselected") ?
+                document.querySelector(`[class="grid x${x} y${index}"]`).innerText = "0%" :
+                document.querySelector(`[class="grid x${x} y${index}"]`).innerText = (row[x] >= 0 ? `${(row[x] * 100).toFixed(1)}%` : "X");
+
+            row[x] >= max ?
+                document.querySelector(`[class="grid x${x} y${index}"]`).setAttribute("color", "target") :
+                row[x] >= max - 0.05 ?
+                    document.querySelector(`[class="grid x${x} y${index}"]`).setAttribute("color", "high") :
+                    row[x] >= max - 0.1 ?
+                        document.querySelector(`[class="grid x${x} y${index}"]`).setAttribute("color", "mid") :
+                        row[x] >= max - 0.2 ?
+                            document.querySelector(`[class="grid x${x} y${index}"]`).setAttribute("color", "low") :
+                            document.querySelector(`[class="grid x${x} y${index}"]`).removeAttribute("color");
         }
     }
 }
@@ -179,7 +195,7 @@ let n = "1";
 let a = "1";
 let b = "3";
 let c = "5";
-let defaultCount = [[1, 3, 5], [1, 2, 3], [1, 2, 4], [1, 3, 5], [1, 2, 3], [1, 2, 4], [0, 0, 0]];
+let defaultCount = [[1, 3, 5], [1, 2, 3], [1, 2, 4], [1, 3, 5], [1, 2, 3], [1, 2, 4], [2, 3, 6]];
 let rectangles = generateRectangles(n, a, b, c);
 
 let averageResults;
@@ -206,7 +222,7 @@ document.querySelector('#app').innerHTML = `
         </div>
         ${(function fun() {
         let html = "";
-        for (let n = 0; n <= 1; n++) {
+        for (let n = 0; n <= 2; n++) {
             html += `<button class="a" data-num=${n}>${n}</button>`
         }
         return html;
@@ -233,7 +249,7 @@ document.querySelector('#app').innerHTML = `
         </div>
             ${(function fun() {
         let html = "";
-        for (let n = 0; n <= 5; n++) {
+        for (let n = 0; n <= 6; n++) {
             html += `<button class="c" data-num=${n}>${n}</button>`
         }
         return html;
@@ -248,7 +264,7 @@ document.querySelector('#app').innerHTML = `
         let html = "";
         for (let y = 0; y < 5; y++) {
             for (let x = 0; x < 9; x++) {
-                html += `<div class="grid x${x} y${y}">0.00</div>`;
+                html += `<button class="grid x${x} y${y}" tabindex="0">0%</button>`;
             }
             html += `</br>`;
         }
@@ -341,7 +357,8 @@ btn2.addEventListener("click", () => {
     for (let y = 0; y < 5; y++) {
         for (let x = 0; x < 9; x++) {
             document.querySelector(`[class="grid x${x} y${y}"]`).removeAttribute("btnSelected", "");
-            document.querySelector(`[class="grid x${x} y${y}"]`).innerText = "0.00";
+            document.querySelector(`[class="grid x${x} y${y}"]`).removeAttribute("color", "");
+            document.querySelector(`[class="grid x${x} y${y}"]`).innerText = "0.0%";
         }
     }
 });

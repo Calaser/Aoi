@@ -5,8 +5,8 @@
   box-sizing: border-box;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: #213547;
+  background-color: #ffffff;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -64,6 +64,7 @@ h3 {
   margin-right: 3px;
   display: inline-flex;
   flex-direction: column;
+  flex-shrink: 0;
   align-items: center;
   font-weight: bold;
 }
@@ -86,7 +87,7 @@ h3 {
 
 .print {
   flex-grow: 1;
-  background-color: #23ffc8;
+  background-color: #23ff7f;
 }
 
 .reset {
@@ -103,37 +104,30 @@ h3 {
   }
 }
 
-button {
-  padding: 0.3em 1.2em;
+button:not(:where(.grid)) {
+  padding: 5px 18px;
   height: fit-content;
   border-radius: 8px;
   border: 2px solid transparent;
   margin-inline: 3px;
   font-size: 1em;
   font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
+  background-color: #fddede;
+
+  @media (max-width:450px) {
+    padding: 3px 14px;
+    margin-inline: 3px;
+  }
 }
 
-button:hover {
+button:not(:where(.grid)):hover {
   border-color: #646cff;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-
-  a:hover {
-    color: #747bff;
-  }
-
-  button {
-    background-color: #fddede;
-  }
+a:hover {
+  color: #747bff;
 }
 
 .output {
@@ -146,24 +140,46 @@ button:hover {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  width: 50px;
-  height: 50px;
-  border: 1px solid rgb(95, 95, 233);
+  width: 60px;
+  height: 60px;
+  border: 1px solid rgb(151, 151, 151);
   font-weight: 700;
 
+  &:hover {
+    filter: brightness(1.2);
+  }
+
   &[btnSelected] {
-    background-color: rgb(130, 130, 255);
+    background-color: rgb(78, 70, 95) !important;
+    color:rgb(160, 160, 160);
+    opacity: 1;
+  }
+
+  &[color="target"] {
+    background-color: #ff1717;
+  }
+
+  &[color="high"] {
+    background-color: #ff7045;
+  }
+
+  &[color="mid"] {
+    background-color: #ffb75a;
+  }
+
+  &[color="low"] {
+    background-color: #fff492;
   }
 }
 
-@media (max-width:600px) {
+@media (max-width:650px) {
   #app {
     padding: 5px;
   }
 
   .grid {
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
     font-size: 12px;
   }
 
