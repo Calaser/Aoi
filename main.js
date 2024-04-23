@@ -132,13 +132,15 @@ function printBoard(board) {
 
             row[x] >= max ?
                 document.querySelector(`[class="grid x${x} y${index}"]`).setAttribute("color", "target") :
-                row[x] >= max - 0.05 ?
-                    document.querySelector(`[class="grid x${x} y${index}"]`).setAttribute("color", "high") :
-                    row[x] >= max - 0.1 ?
-                        document.querySelector(`[class="grid x${x} y${index}"]`).setAttribute("color", "mid") :
-                        row[x] >= max - 0.2 ?
-                            document.querySelector(`[class="grid x${x} y${index}"]`).setAttribute("color", "low") :
-                            document.querySelector(`[class="grid x${x} y${index}"]`).removeAttribute("color");
+                row[x] >= max - 0.02 ?
+                    document.querySelector(`[class="grid x${x} y${index}"]`).setAttribute("color", "almost") :
+                    row[x] >= max - 0.05 ?
+                        document.querySelector(`[class="grid x${x} y${index}"]`).setAttribute("color", "high") :
+                        row[x] >= max - 0.1 ?
+                            document.querySelector(`[class="grid x${x} y${index}"]`).setAttribute("color", "mid") :
+                            row[x] >= max - 0.2 ?
+                                document.querySelector(`[class="grid x${x} y${index}"]`).setAttribute("color", "low") :
+                                document.querySelector(`[class="grid x${x} y${index}"]`).removeAttribute("color");
         }
     }
 }
@@ -319,7 +321,7 @@ btn.addEventListener("click", (e) => {
         isProcessing = true;
 
         rectangles = generateRectangles(n, a, b, c);
-        averageResults = simulatePlacement(10000);
+        averageResults = simulatePlacement(15000);
         printBoard(checkAndCorrectResults());
 
         setTimeout(() => {

@@ -156,11 +156,16 @@ a:hover {
   }
 
   &[color="target"] {
-    background-color: #ff1717;
+    background-color: #ff0000;
+    box-shadow: inset 0px 0px 3px 4px #9b0000;
+  }
+
+  &[color="almost"] {
+    background-color: #ff0b0b;
   }
 
   &[color="high"] {
-    background-color: #ff7045;
+    background-color: #ff6637;
   }
 
   &[color="mid"] {
