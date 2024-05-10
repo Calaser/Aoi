@@ -130,17 +130,19 @@ function printBoard(board) {
                 document.querySelector(`[class="grid x${x} y${index}"]`).innerText = "0%" :
                 document.querySelector(`[class="grid x${x} y${index}"]`).innerText = (row[x] >= 0 ? `${(row[x] * 100).toFixed(1)}%` : "X");
 
-            row[x] >= max ?
-                document.querySelector(`[class="grid x${x} y${index}"]`).setAttribute("color", "target") :
-                row[x] >= max - 0.02 ?
-                    document.querySelector(`[class="grid x${x} y${index}"]`).setAttribute("color", "almost") :
-                    row[x] >= max - 0.05 ?
-                        document.querySelector(`[class="grid x${x} y${index}"]`).setAttribute("color", "high") :
-                        row[x] >= max - 0.1 ?
-                            document.querySelector(`[class="grid x${x} y${index}"]`).setAttribute("color", "mid") :
-                            row[x] >= max - 0.2 ?
-                                document.querySelector(`[class="grid x${x} y${index}"]`).setAttribute("color", "low") :
-                                document.querySelector(`[class="grid x${x} y${index}"]`).removeAttribute("color");
+            row[x] === 0 ?
+                document.querySelector(`[class="grid x${x} y${index}"]`).removeAttribute("color") :
+                row[x] >= max ?
+                    document.querySelector(`[class="grid x${x} y${index}"]`).setAttribute("color", "target") :
+                    row[x] >= max - 0.02 ?
+                        document.querySelector(`[class="grid x${x} y${index}"]`).setAttribute("color", "almost") :
+                        row[x] >= max - 0.05 ?
+                            document.querySelector(`[class="grid x${x} y${index}"]`).setAttribute("color", "high") :
+                            row[x] >= max - 0.1 ?
+                                document.querySelector(`[class="grid x${x} y${index}"]`).setAttribute("color", "mid") :
+                                row[x] >= max - 0.2 ?
+                                    document.querySelector(`[class="grid x${x} y${index}"]`).setAttribute("color", "low") :
+                                    document.querySelector(`[class="grid x${x} y${index}"]`).removeAttribute("color");
         }
     }
 }
@@ -193,10 +195,10 @@ function generateRectangles(n, a, b, c) {
 
 
 
-let n = "1";
-let a = "1";
-let b = "3";
-let c = "5";
+let n = 1;
+let a = 1;
+let b = 3;
+let c = 5;
 let defaultCount = [[1, 3, 5], [1, 2, 3], [1, 2, 4], [1, 3, 5], [1, 2, 3], [1, 2, 4], [2, 3, 6]];
 let rectangles = generateRectangles(n, a, b, c);
 
@@ -281,10 +283,10 @@ for (let k = 0; k < 3; k++)
     document.querySelector(`.prize${k + 1}`).innerText = `(${data[n - 1][k][0]} x ${data[n - 1][k][1]})`;
 
 document.querySelectorAll(".n").forEach(btn => btn.addEventListener("click", (e) => {
-    n = e.target.dataset.num;
-    a = defaultCount[n - 1][0].toString();
-    b = defaultCount[n - 1][1].toString();
-    c = defaultCount[n - 1][2].toString();
+    n = +(e.target.dataset.num);
+    a = defaultCount[n - 1][0];
+    b = defaultCount[n - 1][1];
+    c = defaultCount[n - 1][2];
 
     for (let k = 0; k < 3; k++)
         document.querySelector(`.prize${k + 1}`).innerText = `(${data[n - 1][k][0]} x ${data[n - 1][k][1]})`;
@@ -304,10 +306,10 @@ document.querySelectorAll(".c").forEach(btn => btn.addEventListener("click", (e)
 }))
 
 function renderBtn() {
-    document.querySelectorAll(".n").forEach(btn => { btn.dataset.num === n ? btn.classList.add("selected") : btn.classList.remove("selected") });
-    document.querySelectorAll(".a").forEach(btn => { btn.dataset.num === a ? btn.classList.add("selected") : btn.classList.remove("selected") });
-    document.querySelectorAll(".b").forEach(btn => { btn.dataset.num === b ? btn.classList.add("selected") : btn.classList.remove("selected") });
-    document.querySelectorAll(".c").forEach(btn => { btn.dataset.num === c ? btn.classList.add("selected") : btn.classList.remove("selected") });
+    document.querySelectorAll(".n").forEach(btn => { +(btn.dataset.num) === n ? btn.classList.add("selected") : btn.classList.remove("selected") });
+    document.querySelectorAll(".a").forEach(btn => { +(btn.dataset.num) === a ? btn.classList.add("selected") : btn.classList.remove("selected") });
+    document.querySelectorAll(".b").forEach(btn => { +(btn.dataset.num) === b ? btn.classList.add("selected") : btn.classList.remove("selected") });
+    document.querySelectorAll(".c").forEach(btn => { +(btn.dataset.num) === c ? btn.classList.add("selected") : btn.classList.remove("selected") });
 }
 
 
