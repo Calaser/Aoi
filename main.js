@@ -293,15 +293,15 @@ document.querySelectorAll(".n").forEach(btn => btn.addEventListener("click", (e)
     renderBtn();
 }))
 document.querySelectorAll(".a").forEach(btn => btn.addEventListener("click", (e) => {
-    a = e.target.dataset.num;
+    a = +e.target.dataset.num;
     renderBtn();
 }))
 document.querySelectorAll(".b").forEach(btn => btn.addEventListener("click", (e) => {
-    b = e.target.dataset.num;
+    b = +e.target.dataset.num;
     renderBtn();
 }))
 document.querySelectorAll(".c").forEach(btn => btn.addEventListener("click", (e) => {
-    c = e.target.dataset.num;
+    c = +e.target.dataset.num;
     renderBtn();
 }))
 
